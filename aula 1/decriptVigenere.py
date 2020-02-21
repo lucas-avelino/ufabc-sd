@@ -1,12 +1,13 @@
-texto = input("Digite o texto que deseja desencripitar: ").upper()
-senha = input("Digite a senha do texto: ").upper()
+texto = input("Digite o texto que deseja desencripitar: ")
+senha = input("Digite a senha do texto: ")
 
+inicioDoAlfabeto = ord(' ')
+tamanhoDoAlfabeto = ord('z')-inicioDoAlfabeto+1
 
-numeroLetrasTexto = [ ord(letra)-65 for letra in texto] #mapeado para numero
-numeroLetrasSenha = [ ord(letra)-65 for letra in senha] #mapeado para numero
+numeroLetrasTexto = [ ord(letra) - inicioDoAlfabeto for letra in texto] #mapeado para numero
+numeroLetrasSenha = [ ord(letra) - inicioDoAlfabeto for letra in senha] #mapeado para numero
 final = []
 for i in range(0, len(numeroLetrasTexto)):
+    final.append((tamanhoDoAlfabeto + numeroLetrasTexto[i] - numeroLetrasSenha[i%len(numeroLetrasSenha)])%tamanhoDoAlfabeto)
 
-    final.append((numeroLetrasTexto[i] - numeroLetrasSenha[i%len(numeroLetrasSenha)])%26)
-
-print(''.join([chr(letra+65) for letra in final]))
+print(''.join([chr(letra+inicioDoAlfabeto) for letra in final]))
